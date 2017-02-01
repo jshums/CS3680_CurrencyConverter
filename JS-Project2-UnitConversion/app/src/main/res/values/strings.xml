@@ -1,0 +1,18 @@
+<resources>
+    <string name="app_name">JS-Project2-UnitConversion</string>
+    <string name="name">Enter number</string>
+    <string name="textview">TextView</string>
+    <string name="convertButton">Convert</string>
+    <string name="swapButton">Swap</string>
+    <string name="amountCurrency">Enter amount of currency to convert</string>
+    <string name="toAmount">Conversion amount:</string>
+    <string name="toLabel">To:</string>
+    <string name="fromLabel">From:</string>
+    <string-array name="currency_array">
+        <item>US Dollar</item>
+        <item>Japanese Yen</item>
+        <item>Euro</item>
+        <item>Mexican Peso</item>
+        <item>Honduran Lempira</item>
+    </string-array>
+</resources>
