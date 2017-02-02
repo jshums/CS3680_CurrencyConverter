@@ -7,15 +7,24 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
+
+import java.text.DecimalFormat;
 
 public class UnitConversionActivity extends AppCompatActivity {
 
     private Button mConvertButton;
     private Button mSwapButton;
+
     private Spinner mFromSpinner;
     private Spinner mToSpinner;
+
+    private EditText mInEditText;
+    private EditText mOutEditText;
+
+    private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
 
     double [][] conversionInfo = new double[][] {
             { 1, 113.93, 0.93, 21.52, 23.63 },
@@ -34,6 +43,9 @@ public class UnitConversionActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_unit_conversion);
 
+        mInEditText = (EditText) findViewById(R.id.edit_text_in);
+        mOutEditText = (EditText) findViewById(R.id.edit_text_out);
+
         mFromSpinner = (Spinner) findViewById(R.id.spinner3);
         mToSpinner = (Spinner) findViewById(R.id.spinner4);
 
@@ -49,8 +61,6 @@ public class UnitConversionActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView adapter, View v, int position, long id){
                 fromCurrency = adapter.getItemAtPosition(position).toString();
                 fromCurrencyPos = position;
-                Toast.makeText(getApplicationContext(),"Selected Currency : " + fromCurrency +
-                        ", at position: " + position, Toast.LENGTH_SHORT).show();
             }
             public void onNothingSelected(AdapterView arg0) {
                 //TODO Auto-generated method stub
@@ -61,8 +71,6 @@ public class UnitConversionActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView adapter, View v, int position, long id){
                 toCurrency = adapter.getItemAtPosition(position).toString();
                 toCurrencyPos = position;
-                Toast.makeText(getApplicationContext(),"Selected Currency : " + toCurrency +
-                        ", at position: " + position, Toast.LENGTH_SHORT).show();
             }
             public void onNothingSelected(AdapterView arg0) {
                 //TODO Auto-generated method stub
@@ -73,25 +81,37 @@ public class UnitConversionActivity extends AppCompatActivity {
         mConvertButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //need to add code
 
                 conversionRate = conversionInfo[fromCurrencyPos][toCurrencyPos];
 
+                if(!(mInEditText.getText().toString().equals(""))) {
+                    fromAmount = Double.parseDouble(mInEditText.getText().toString());
 
-                Toast.makeText(UnitConversionActivity.this,"Rate will be from " + fromCurrency +
-                        " to " + toCurrency + " at " + conversionRate + " " + toCurrency +
-                        " per " + fromCurrency, Toast.LENGTH_LONG).show();
+                    toAmount = fromAmount * conversionRate;
+
+                    mOutEditText.setText(REAL_FORMATTER.format(toAmount));
+                }
+                else
+                {
+                    mOutEditText.setText("");
+                    Toast.makeText(UnitConversionActivity.this,"Please enter a number", Toast.LENGTH_LONG).show();
+                }
             }
         });
         mSwapButton = (Button) findViewById(R.id.swap_button);
         mSwapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                int temp;
+                int tempInt;
+                String tempString;
 
-                temp = toCurrencyPos;
+                tempInt = toCurrencyPos;
                 toCurrencyPos = fromCurrencyPos;
-                fromCurrencyPos = temp;
+                fromCurrencyPos = tempInt;
+
+                tempString = mOutEditText.getText().toString();
+                mOutEditText.setText(mInEditText.getText().toString());
+                mInEditText.setText(tempString);
 
                 mToSpinner.setSelection(toCurrencyPos);
                 mFromSpinner.setSelection(fromCurrencyPos);

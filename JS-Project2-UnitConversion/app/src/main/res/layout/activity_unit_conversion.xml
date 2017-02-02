@@ -24,9 +24,9 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editText2"
+        android:id="@+id/edit_text_in"
         android:gravity="center"
-        android:labelFor="@id/editText2" />
+        android:labelFor="@id/edit_text_in" />
 
     <LinearLayout
         android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
         android:layout_height="wrap_content"
         android:inputType="numberDecimal"
         android:ems="10"
-        android:id="@+id/editText"
-        android:labelFor="@id/editText"
+        android:id="@+id/edit_text_out"
+        android:labelFor="@id/edit_text_out"
         android:gravity="center"/>
 </LinearLayout>
