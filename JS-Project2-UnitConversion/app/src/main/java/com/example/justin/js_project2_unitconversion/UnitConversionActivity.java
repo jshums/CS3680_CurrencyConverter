@@ -26,6 +26,7 @@ public class UnitConversionActivity extends AppCompatActivity {
 
     private static DecimalFormat REAL_FORMATTER = new DecimalFormat("0.##");
 
+    //conversion rate information
     double [][] conversionInfo = new double[][] {
             { 1, 113.93, 0.93, 21.52, 23.63 },
             { 0.0088, 1, 0.0082, 0.19, 0.21 },
